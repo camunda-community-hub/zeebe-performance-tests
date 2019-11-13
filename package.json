@@ -4,7 +4,9 @@
   "description": "Need to understand how long it takes to complete a workflow end to end, and how that that time is split between \t- Zeebe     \t- Starting the workflow     \t- Moving execution between tasks     \t- Making decisions   \t- Workers   \t- The network",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "watch": "tsc -w"
   },
   "repository": {
     "type": "git",
@@ -18,8 +20,11 @@
   },
   "homepage": "https://github.com/BrighTide/zeebe-performance-tests#readme",
   "dependencies": {
+    "@types/node": "^12.12.7",
+    "lodash": "^4.17.15",
     "ts-node": "^8.5.0",
     "typescript": "^3.7.2",
-    "zeebe-node": "^0.21.2"
+    "uuid": "^3.3.3",
+    "zeebe-node": "git+https://git@github.com/creditsenseau/zeebe-client-node-js.git#feature/add-timings"
   }
 }

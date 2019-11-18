@@ -92,3 +92,21 @@ Task 3: 53ms
 Task 4: 50ms
 Task 5: 50ms
 ```
+
+## Conclusions
+
+No appreciable difference with multi-threaded vs single-threaded. Node is automatically multi-threaded as soon as it does any IO, via the OS threading. And >95% of the time it is waiting for the broker.
+
+Completing a job takes 14ms for an ack to come back. If you say that is instantaneous on the gateway, you get a 7ms network one-way trip through the local stack. 
+
+The node handler takes 0-1ms.
+
+The time between workers is 50ms-70ms. 7ms is sending from the previous worker. 7ms is fetching it.
+
+Therefore...
+
+In an ideal situation: 4GB RAM, zero load, no computation of conditions or transformation, no replication commit overhead, no exporters;
+
+The 0.22.0-alpha1 broker takes 36ms-56ms to move a task to the next step.
+
+That's the minimum latency you can expect, today.

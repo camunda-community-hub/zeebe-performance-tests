@@ -97,7 +97,7 @@ Task 5: 50ms
 
 No appreciable difference with multi-threaded vs single-threaded. Node is automatically multi-threaded as soon as it does any IO, via the OS threading. And >95% of the time it is waiting for the broker.
 
-Completing a job takes 11 - 14ms for an ack to come back. If you say that is instantaneous on the gateway, you get a 6-7ms network one-way trip through the local stack. 
+Completing a job takes 11 - 14ms for an ack to come back. If you say that is instantaneous on the gateway, you get a 6-7ms one-way network trip through the local stack. 
 
 The node handler takes 0-1ms.
 

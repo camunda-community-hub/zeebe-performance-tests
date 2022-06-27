@@ -10,9 +10,9 @@ const workflows = [
 
 async function main() {
 	// Deploy workflows
-	await zbc.deployWorkflow(workflows[0])
+	await zbc.deployProcess(workflows[0])
 	const start = Date.now()
-	const res = await zbc.createWorkflowInstanceWithResult('uncontested', { start })
+	const res = await zbc.createProcessInstanceWithResult('uncontested', { start })
 	const end = Date.now()
 	console.log(`Total time: ${end - start}ms`)
 	console.log(`Task 1: ${res.variables.w1 - start}ms`)

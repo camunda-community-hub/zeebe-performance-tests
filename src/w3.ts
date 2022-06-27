@@ -1,17 +1,14 @@
 import * as ZB from 'zeebe-node'
+import { print } from './print'
 const zbc = new ZB.ZBClient({ loglevel: 'NONE' })
 
-zbc.createWorker(
-	null,
-	'task3',
-	(_, complete) => {
+zbc.createWorker({
+	taskType: 'task3',
+	taskHandler: job => {
 		const w3 = Date.now()
-		complete
-			.success({ w3 })
-			.then(() => console.log(`${Date.now() - w3}ms to broker ack complete 3`))
 		console.log(`${Date.now() - w3}ms in handler 3`)
+		return job.complete({ w3 })
+			.then(res => print(`${Date.now() - w3}ms to broker ack complete 3`, res))
 	},
-	{
-		longPoll: 30000,
-	}
-)
+	longPoll: 30000,
+})

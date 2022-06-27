@@ -45,7 +45,7 @@ async function main() {
 
 	for (const workflow of workflows) {
 		const tests: any = []
-		for (let i = 0; i < 20; i++) {
+		for (let i = 0; i < 1; i++) {
 			console.log(`Testing ${workflow} ${i}/`)
 			tests.push(await doTest(workflow.match(/.*\/(.*).bpmn/)![1]))
 		}

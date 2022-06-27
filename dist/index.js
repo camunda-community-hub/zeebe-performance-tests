@@ -20,9 +20,11 @@ const workflows = [
     './bpmn/uncontested-with-iomapping.bpmn',
     './bpmn/uncontested-with-decisions.bpmn',
 ];
+const zeebeHost = process.env.ZEEBE_HOST || 'localhost';
 async function main() {
     // Connect to zeebe
-    const zbc = new ZB.ZBClient(testStore, process.env.ZEEBE_HOST || 'localhost', { loglevel: 'NONE', longPoll: 600000 });
+    console.log(`Connecting to ${zeebeHost}...`);
+    const zbc = new ZB.ZBClient(testStore, zeebeHost, { loglevel: 'NONE', longPoll: 600000 });
     const topology = await zbc.topology();
     console.log(JSON.stringify(topology, null, 2));
     // Deploy workflows
@@ -37,8 +39,8 @@ async function main() {
         complete.success({ ...job.variables });
     });
     // Execute tests
+    console.log('Warming up...');
     for (const workflow of workflows) {
-        console.log('Warming up...');
         const tests = [];
         for (let i = 0; i < 20; i++) {
             // console.log(`Testing ${workflow} ${i}/`)
@@ -47,7 +49,7 @@ async function main() {
     }
     for (const workflow of workflows) {
         const tests = [];
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 1; i++) {
             console.log(`Testing ${workflow} ${i}/`);
             tests.push(await doTest(workflow.match(/.*\/(.*).bpmn/)[1]));
         }

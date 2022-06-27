@@ -1,8 +1,12 @@
 # zeebe-performance-tests
 
-This test measures the latency of the broker in transitioning between flow nodes. There is a theoretical maximum end-to-end performance
+This test measures the latency of the broker in transitioning between flow nodes. There is a theoretical maximum end-to-end process time performance imposed by the broker's overhead. This test tells you what the theoretical minimum cycle time would be on given hardware for a particular version of the broker. 
 
-## Josh's test
+Check the branches for tests that run against different versions of the broker. 
+
+This branch runs against: 8.0.2.
+
+## Running the test
 
 ```
 npm i -g ts-node typescript
